@@ -1,0 +1,13 @@
+name: Sample MLProject
+
+entry_points:
+  train:
+    command: "python train.py"
+
+  predict:
+    command: "python predict.py --run-id {run_id}"
+    parameters:
+      run_id:
+        type: string
+        description: "The run ID of the model to use for prediction"
+  

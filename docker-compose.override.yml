@@ -1,0 +1,15 @@
+services: 
+  db:
+    image: mssql
+    build:
+      context: ./db
+    environment:
+      - DB_NAMES=mlflow
+    command: ./entrypoints.sh
+    ports:
+      # For login from outside container, use 1430
+      # From other containers in the same network, do db:1433
+      - "${DB_PORT:-1433}:1433"
+    volumes:
+      - "${BASE_DIR?Variable not set}/db:/var/opt/mssql/data"
+    restart: always
